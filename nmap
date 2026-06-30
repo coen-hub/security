@@ -1,0 +1,36 @@
+Dit is van een oefenexamen: 
+
+Tutorials:
+
+
+NMAP MINI-TUTORIAL — POORTEN SCANNEN
+
+Basis scan (snelste check, top 1000 poorten):
+nmap <ip>
+Voorbeeld: nmap 192.168.1.50
+Alle 65535 poorten scannen:
+nmap -p- <ip>
+Specifieke poorten scannen:
+nmap -p 80,443,22 <ip>
+Met versie-info van de services (welke software draait erop):
+nmap -sV <ip>
+Alles in één commando (poorten + versie + standaard scripts):
+nmap -sV -sC -p- <ip>
+Resultaat opslaan in een bestand:
+nmap -sV -sC -p- <ip> -oN scan_resultaat.txt
+
+Uitleg opties:
+-p- = scan alle poorten (anders alleen top 1000)
+-sV = laat zien welke versie van software er draait (bv. Apache 2.4.41)
+-sC = draait standaard nmap-scripts die basis info en simpele kwetsbaarheden checken
+-oN bestand.txt = slaat de output op in leesbaar tekstformaat
+Voor jouw examen is dit voldoende:
+nmap -sV -sC -p- <ip> -oN nmap_resultaat.txt
+Dat geeft je open poorten, welke services erop draaien, en met welke versie — genoeg om in je auditrapport te zetten.
+
+
+
+
+WERKWIJZE OPDRACHT 2
+Kwetsbaarheden identificeren uit je scanresultaten (verkeerde serverconfig, zwakke wachtwoorden, open poorten die dicht moeten). Verbeteringen doorvoeren: firewallregels (iptables/ufw of via de VM-firewall), wachtwoordbeleid afdwingen (bv. via PAM op Linux of GPO op Windows), MFA waar mogelijk inschakelen. Alles wat je doet log je met tijdstempel in het logboek en commit je los in git zodat je voortgang traceerbaar is.
+Commit elke stap apart in git, dat telt mee als bewijs van je proces voor de beoordelaar.
