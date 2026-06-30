@@ -1,0 +1,85 @@
+RISICOMATRIX TEMPLATE (kans x impact)
+Impact: LaagImpact: MiddenImpact: HoogKans: HoogMiddenHoogKritiekKans: MiddenLaagMiddenHoogKans: LaagLaagLaagMidden
+Hoe te gebruiken:
+
+Voor elke kwetsbaarheid die je vindt, schat in: hoe groot is de kans dat dit misbruikt wordt (laag/midden/hoog) en hoe groot is de impact als het misbruikt wordt (laag/midden/hoog).
+Zoek het vakje op in de matrix om het risiconiveau te bepalen.
+Gebruik dat niveau in je risicoanalyse-tabel.
+
+Voorbeeld ingevuld:
+KwetsbaarheidKansImpactRisico (uit matrix)Zwak wachtwoordbeleidHoogHoogKritiekVerouderde TLS-versieMiddenHoogHoogOpen onnodige poort (geen dienst actief)LaagMiddenLaagGeen WAF actiefHoogMiddenHoogOntbrekende MFA op adminaccountMiddenHoogHoog
+Plak deze matrix bovenaan je risicoanalyse.md, en gebruik hem als naslag bij het scoren van elke kwetsbaarheid. Zo onderbouw je je risico-inschatting objectief in plaats van "het lijkt me hoog risico".
+
+
+TEMPLATE 1: AUDITRAPPORT (opdracht1-audit/rapport/auditrapport.md)
+Auditrapport - [Klantnaam]
+Datum: [datum]
+Uitgevoerd door: [jouw naam]
+1. Samenvatting
+Korte beschrijving van wat er getest is en de belangrijkste bevindingen in 3-4 zinnen.
+2. Scope
+
+Doelwit: [ip-adres / domein]
+Type test: Webserver security scan
+
+3. Gebruikte tools
+
+Nmap versie: [nmap --version]
+OWASP ZAP versie: [versienummer]
+
+4. Bevindingen
+Bevinding 1: [titel, bv. "Verouderde TLS-versie actief"]
+
+Ernst: Hoog / Midden / Laag
+Beschrijving: wat heb je gevonden
+Bewijs: zie scans/nmap_ssl.txt regel X
+Risico: wat kan er misgaan
+
+Bevinding 2: [titel]
+
+Ernst:
+Beschrijving:
+Bewijs:
+Risico:
+
+(herhaal per gevonden issue)
+5. Conclusie
+Algemene staat van de security in 2-3 zinnen.
+
+TEMPLATE 2: VERBETERPLAN (opdracht1-audit/rapport/verbeterplan.md)
+Verbeterplan - [Klantnaam]
+Datum: [datum]
+BevindingAdviesPrioriteitActie doorZwakke TLS-cipherSchakel TLS 1.0/1.1 uit, forceer TLS 1.2+HoogHostingbedrijfGeen WAF actiefImplementeer Web Application FirewallHoogHostingbedrijfOnbeperkte toegang admin paneelBeperk toegang via IP-whitelist/firewallregelMiddenKlant[bevinding][advies][hoog/midden/laag][wie]
+Toelichting per advies
+TLS upgraden: korte uitleg waarom dit nodig is.
+WAF inschakelen: korte uitleg.
+Toegang beperken: korte uitleg.
+
+TEMPLATE 3: LOGBOEK (opdracht2-incident/logboek/logboek.md)
+Logboek - P2-K2 Examen
+TijdActieResultaat2026-06-30 09:00Examen gestart, scope bevestigd-2026-06-30 09:15Nmap full scan gestart op [ip]-2026-06-30 09:32Nmap scan voltooid3 open poorten: 22, 80, 4432026-06-30 09:45OWASP ZAP spider gestart-2026-06-30 10:10ZAP active scan voltooid2 kwetsbaarheden gevonden (XSS, missing headers)2026-06-30 10:30Firewallregel toegepast op poort XPoort gesloten, geverifieerd met nmap[tijd][actie][resultaat]
+
+TEMPLATE 4: RISICOANALYSE (opdracht2-incident/risicoanalyse/risicoanalyse.md)
+Risicoanalyse - [Klantnaam]
+Datum: [datum]
+KwetsbaarheidKansImpactRisico (Kans x Impact)AanbevelingZwak wachtwoordbeleidHoogHoogKritiekMFA verplichten + wachtwoordbeleid afdwingenVerouderde softwareMiddenHoogHoogPatch-schema instellen, regelmatig updatenOpen onnodige poortLaagMiddenLaagPoort sluiten via firewall[kwetsbaarheid][laag/midden/hoog][laag/midden/hoog][score][aanbeveling]
+Algemene aanbevelingen
+
+Meerfactorauthenticatie (MFA) instellen op alle beheeraccounts
+Regelmatig updates/patches uitvoeren
+Wachtwoordbeleid afdwingen (lengte, complexiteit, verlooptermijn)
+
+
+TEMPLATE 5: E-MAIL NAAR OPDRACHTGEVER
+Onderwerp: Resultaten security-audit [datum]
+Beste [naam],
+Hierbij ontvangt u de resultaten van de uitgevoerde security-audit op [doelwit/systeem].
+In de bijlage vindt u:
+
+Het volledige auditrapport met alle bevindingen
+Een verbeterplan met concrete aanbevelingen, geprioriteerd op urgentie
+
+Kort samengevat: [1-2 zinnen belangrijkste bevindingen, bv. "we hebben verouderde TLS-instellingen en ontbrekende WAF-bescherming geconstateerd"].
+We adviseren om de hoge-prioriteit punten op korte termijn op te pakken. Heeft u vragen over het rapport, neem dan gerust contact op.
+Met vriendelijke groet,
+[jouw naam]
